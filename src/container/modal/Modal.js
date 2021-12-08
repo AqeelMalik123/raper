@@ -20,17 +20,20 @@ const style = {
 };
 
 function ChildModal() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const buttonHandler=(event)=>{
+    
+    }
 
   return (
     <React.Fragment>
-      <Button onClick={handleOpen}>Submit post</Button>
+      <Button onClick={handleOpen} onClick={buttonHandler}>Submit post</Button>
       <Modal
         hideBackdrop
         open={open}
@@ -58,6 +61,10 @@ export default function NestedModal() {
   const handleClose = () => {
     setOpen(false);
   };
+  
+  const onInputHandler=(event)=>{
+    console.log(event.target.value)
+  }
 
   return (
     <div>
@@ -71,7 +78,7 @@ export default function NestedModal() {
         <Box sx={{ ...style, width: 400 }}>
           <h2 id="parent-modal-title">Text in a modal</h2>
           <p id="parent-modal-description">
-           <input placeholder="enter the name"/>           
+           <input placeholder="enter the name" onChange={onInputHandler}/>           
            <input placeholder="enter the your email"/>
            <div className="mb-1">
      Image <span className="font-css top">*</span>
