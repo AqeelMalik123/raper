@@ -6,25 +6,33 @@ import BasicTextFields from "../../container/input/InputText";
 import "./css/style.css"
 import BasicButtons from "../../container/button";
 import { Link } from "react-router-dom";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+import { useState } from "react";
+
 
 
 
 
 const Login=()=>{
-    const userLogin=()=>{
-        const auth = getAuth();
-signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    console.log(user)
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  });
-    }
+    const [email,setEmail]=useState("")
+    const [password,setPassword]=useState("")
+  const onLoginHandler=()=>{
+      console.log(email,password)
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage)
+        // ..
+      });
+  }
     return(
         <div>
             <MenuAppBar title="login"/>
@@ -37,15 +45,15 @@ signInWithEmailAndPassword(auth, email, password)
         <h1>Login</h1>
      
          <div className="mt-20">
-             <BasicTextFields label="Email" type="email"/>
+             <BasicTextFields onChange={(e)=>setEmail(e.target.value)} value={email} label="Email" type="email"/>
 
          </div>
          <div className="mt-20">
-             <BasicTextFields label="Password" type="password"/>
+             <BasicTextFields onChange={(e)=>setPassword(e.target.value)} value={password} label="Password" type="password"/>
          </div>
         <div className="mt-20">
 
-        <BasicButtons title="login"/>
+        <BasicButtons onClick={onLoginHandler} title="login"/>
         </div>
                  <div className="mt-20" style={{textAlign:"center"}}>
                      <Link to="/">Register Now</Link>
