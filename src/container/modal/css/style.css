@@ -1,0 +1,10 @@
+ .middle{
+    display: flex;
+    background-color: black;
+    color: white;
+    /* width: 50%; */
+    /* height: 70px; */
+    justify-content: end;
+    align-items: flex-end;
+    
+} 
