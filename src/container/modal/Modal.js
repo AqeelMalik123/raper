@@ -1,96 +1,35 @@
+import React, { useState } from 'react';
+import { Modal, Button } from 'antd';
 
-import "./css/style.css"
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import Button from '@mui/material/Button';
+const Modalpost = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  pt: 2,
-  px: 4,
-  pb: 3,
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  return (
+    <>
+      <Button type="primary" onClick={showModal}>
+        Open Modal
+      </Button>
+      <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        <input placeholder="enter the name "/>
+        <input placeholder="Email"/>
+        <input type="file" placeholder="picure"/>
+        
+      </Modal>
+    </>
+  );
 };
+export default Modalpost;
 
-function ChildModal() {
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => {
-        setOpen(true);
-    };
-    const handleClose = () => {
-        setOpen(false);
-    };
-    const buttonHandler=(event)=>{
-    
-    }
 
-  return (
-    <React.Fragment>
-      <Button onClick={handleOpen} onClick={buttonHandler}>Submit post</Button>
-      <Modal
-        hideBackdrop
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="child-modal-title"
-        aria-describedby="child-modal-description"
-      >
-        <Box sx={{ ...style, width: 200 }}>
-          <h2 id="child-modal-title">upload data</h2>
-          <p id="child-modal-description">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-          </p>
-          <Button onClick={handleClose}>Close Child Modal</Button>
-        </Box>
-      </Modal>
-    </React.Fragment>
-  );
-}
-
-export default function NestedModal() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-  
-  const onInputHandler=(event)=>{
-    console.log(event.target.value)
-  }
-
-  return (
-    <div>
-      <Button onClick={handleOpen}>Open modal</Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="parent-modal-title"
-        aria-describedby="parent-modal-description"
-      >
-        <Box sx={{ ...style, width: 400 }}>
-          <h2 id="parent-modal-title">Text in a modal</h2>
-          <p id="parent-modal-description">
-           <input placeholder="enter the name" onChange={onInputHandler}/>           
-           <input placeholder="enter the your email"/>
-           <div className="mb-1">
-     Image <span className="font-css top">*</span>
-     <div className="">
-         <input type="file" id="file-input" name="ImageStyle"/>
-     </div>
-</div>
-                      
-          </p>
-          <ChildModal />
-        </Box>
-      </Modal>
-    </div>
-  );
-}

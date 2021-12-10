@@ -10,6 +10,10 @@ import { useState } from "react";
 import { textAlign } from "@mui/system";
 import firebase from "../../config/Firebase"
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+
+
+
 
 
 
@@ -18,23 +22,27 @@ const Signup=()=>{
     const [fullName,setFullName]=useState("")
     const [email,setEmail]=useState("")
     const [password,setPassword]=useState("")
+    let navigate = useNavigate();
     const rigester=()=>{
         console.log(fullName,email,password);
         // createUserWithEmailAndPassword(email,password)
         // .then((res)=>{
-        //     console.log("agaya",res)
-        // }).catch((err)=>{
-        //     console.log("masla ahi ",err)
-        // })
-        // console.log(email);
-        // console.log(password)
-        const auth = getAuth();
-createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-
-    const user = userCredential.user;
-    console.log(user)
+            //     console.log("agaya",res)
+            // }).catch((err)=>{
+                //     console.log("masla ahi ",err)
+                
+                // })
+                // console.log(email);
+                // console.log(password)
+                const auth = getAuth();
+                createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in 
+                    
+                    const user = userCredential.user;
+                    console.log(user)
+                    navigate('/login')
+                
     // ...
   })
   .catch((error) => {
